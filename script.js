@@ -42,28 +42,48 @@ function type() {
     setTimeout(type, typeSpeed);
 }
 
+// Khởi chạy khi DOM load xong
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(type, 1000);
+    
+    // --- 2. Xử lý Logic Click Thành Tích (Accordion) ---
+    const timelineItems = document.querySelectorAll('.timeline-content');
+    
+    timelineItems.forEach(item => {
+        item.addEventListener('click', () => {
+            // Kiểm tra xem mục đang click có đang mở không
+            const isActive = item.classList.contains('active');
+            
+            // Đóng tất cả các mục khác lại
+            timelineItems.forEach(otherItem => {
+                otherItem.classList.remove('active');
+            });
+            
+            // Nếu nó chưa mở thì bật lên (Nếu đang mở thì giữ nguyên trạng thái đóng do lệnh trên)
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
 });
 
-// --- 2. Xử lý API Phát nhạc nền YouTube ---
+// --- 3. Xử lý API Phát nhạc nền YouTube ---
 let player;
 let isMusicPlaying = false;
 const musicToggleBtn = document.getElementById('music-toggle');
 const musicIcon = musicToggleBtn.querySelector('i');
 
-// Hàm này được YouTube API tự động gọi khi API load xong
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('yt-player', {
-        height: '0', // Ẩn video đi
+        height: '0', 
         width: '0',
-        videoId: 'LZoIIqeQ3DQ', // ID của video nhạc bạn chọn
+        videoId: 'LZoIIqeQ3DQ', 
         playerVars: {
             'autoplay': 1,
             'controls': 0,
-            'start': 4318, // Bắt đầu ở giây thứ 4318
+            'start': 4318, 
             'loop': 1,
-            'playlist': 'LZoIIqeQ3DQ', // Bắt buộc phải có để lặp lại
+            'playlist': 'LZoIIqeQ3DQ', 
             'playsinline': 1
         },
         events: {
@@ -74,30 +94,27 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
-    player.setVolume(30); // Đặt âm lượng 30% để nhẹ nhàng
+    player.setVolume(30); 
 
-    // Cố gắng kích hoạt nhạc ngay khi người dùng click lần đầu vào trang
+    // Kích hoạt nhạc ngay khi người dùng click lần đầu vào trang
     document.body.addEventListener('click', function firstPlay() {
         if (!isMusicPlaying && player && player.playVideo) {
             player.playVideo();
         }
-        // Xóa sự kiện lắng nghe sau lần click đầu tiên
         document.body.removeEventListener('click', firstPlay);
     }, { once: true });
 }
 
 function onPlayerStateChange(event) {
-    // Nếu trạng thái là đang phát (PLAYING = 1)
     if (event.data === YT.PlayerState.PLAYING) {
         isMusicPlaying = true;
-        musicIcon.className = 'fa-solid fa-music'; // Đổi icon sang nốt nhạc
-        musicToggleBtn.classList.add('playing');   // Thêm hiệu ứng nhịp đập
+        musicIcon.className = 'fa-solid fa-music'; 
+        musicToggleBtn.classList.add('playing');   
     }
 }
 
-// Xử lý sự kiện khi click trực tiếp vào nút nhạc
 musicToggleBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // Ngăn sự kiện click của body
+    e.stopPropagation(); 
     
     if (isMusicPlaying) {
         player.pauseVideo();
