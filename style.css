@@ -159,8 +159,8 @@ nav {
 
 .skill-card i, .link-card i {
     font-size: 3rem;
-    color: var(--accent-color);
     margin-bottom: 20px;
+    color: var(--accent-color);
 }
 
 .link-card {
