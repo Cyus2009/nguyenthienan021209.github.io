@@ -1,279 +1,113 @@
-:root {
-    --bg-color: #0f172a;
-    --text-color: #e2e8f0;
-    --accent-color: #38bdf8;
-    --card-bg: #1e293b;
+// --- 1. Hiệu ứng gõ chữ cho tiêu đề ---
+const texts = [
+    "Competitive Programmer", 
+    "AI & RPA Enthusiast", 
+    "Tech Hardware Lover"
+];
+let count = 0;
+let index = 0;
+let currentText = "";
+let letter = "";
+let isDeleting = false;
+
+function type() {
+    if (count === texts.length) {
+        count = 0;
+    }
+    currentText = texts[count];
+    
+    if (isDeleting) {
+        letter = currentText.slice(0, --index);
+    } else {
+        letter = currentText.slice(0, ++index);
+    }
+    
+    document.querySelector('.typing-text').innerHTML = letter + '<span class="cursor">|</span>';
+    
+    let typeSpeed = 100;
+    
+    if (isDeleting) {
+        typeSpeed /= 2;
+    }
+    
+    if (!isDeleting && letter.length === currentText.length) {
+        typeSpeed = 2000; // Dừng lại 2s khi gõ xong
+        isDeleting = true;
+    } else if (isDeleting && letter.length === 0) {
+        isDeleting = false;
+        count++;
+        typeSpeed = 500; // Dừng 0.5s trước khi gõ từ mới
+    }
+    
+    setTimeout(type, typeSpeed);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(type, 1000);
+});
+
+// --- 2. Xử lý API Phát nhạc nền YouTube ---
+let player;
+let isMusicPlaying = false;
+const musicToggleBtn = document.getElementById('music-toggle');
+const musicIcon = musicToggleBtn.querySelector('i');
+
+// Hàm này được YouTube API tự động gọi khi API load xong
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('yt-player', {
+        height: '0', // Ẩn video đi
+        width: '0',
+        videoId: 'LZoIIqeQ3DQ', // ID của video nhạc bạn chọn
+        playerVars: {
+            'autoplay': 1,
+            'controls': 0,
+            'start': 4318, // Bắt đầu ở giây thứ 4318
+            'loop': 1,
+            'playlist': 'LZoIIqeQ3DQ', // Bắt buộc phải có để lặp lại
+            'playsinline': 1
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
+function onPlayerReady(event) {
+    player.setVolume(30); // Đặt âm lượng 30% để nhẹ nhàng
+
+    // Cố gắng kích hoạt nhạc ngay khi người dùng click lần đầu vào trang
+    document.body.addEventListener('click', function firstPlay() {
+        if (!isMusicPlaying && player && player.playVideo) {
+            player.playVideo();
+        }
+        // Xóa sự kiện lắng nghe sau lần click đầu tiên
+        document.body.removeEventListener('click', firstPlay);
+    }, { once: true });
 }
 
-h1, h2, h3 {
-    font-family: 'Fira Code', monospace;
+function onPlayerStateChange(event) {
+    // Nếu trạng thái là đang phát (PLAYING = 1)
+    if (event.data === YT.PlayerState.PLAYING) {
+        isMusicPlaying = true;
+        musicIcon.className = 'fa-solid fa-music'; // Đổi icon sang nốt nhạc
+        musicToggleBtn.classList.add('playing');   // Thêm hiệu ứng nhịp đập
+    }
 }
 
-/* Navbar */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-    background: rgba(15, 23, 42, 0.9);
-    backdrop-filter: blur(10px);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    font-family: 'Fira Code', monospace;
-}
-
-.logo span {
-    color: var(--accent-color);
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-}
-
-.nav-links a {
-    color: var(--text-color);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: var(--accent-color);
-}
-
-/* Hero Section */
-#hero {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0 20px;
-}
-
-.greeting {
-    color: var(--accent-color);
-    font-family: 'Fira Code', monospace;
-    margin-bottom: 10px;
-}
-
-#hero h1 {
-    font-size: 4rem;
-    margin-bottom: 10px;
-}
-
-.typing-text {
-    font-size: 1.5rem;
-    color: #94a3b8;
-    margin-bottom: 20px;
-}
-
-.cursor {
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    50% { opacity: 0; }
-}
-
-.bio {
-    max-width: 600px;
-    margin: 0 auto 30px;
-    color: #cbd5e1;
-}
-
-.btn {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: transparent;
-    color: var(--accent-color);
-    border: 2px solid var(--accent-color);
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn:hover {
-    background-color: var(--accent-color);
-    color: var(--bg-color);
-}
-
-/* Common Container */
-.container {
-    padding: 80px 10%;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-}
-
-.section-title span {
-    color: var(--accent-color);
-}
-
-/* Skills Grid */
-.skills-grid, .links-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.skill-card, .link-card {
-    background: var(--card-bg);
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-top: 3px solid transparent;
-}
-
-.skill-card:hover, .link-card:hover {
-    transform: translateY(-10px);
-    border-top: 3px solid var(--accent-color);
-    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.1);
-}
-
-.skill-card i, .link-card i {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    color: var(--accent-color);
-}
-
-.link-card {
-    text-decoration: none;
-    color: var(--text-color);
-    display: block;
-}
-
-/* Timeline & Achievement Hover Effect */
-.timeline {
-    list-style: none;
-    border-left: 2px solid var(--accent-color);
-    padding-left: 30px;
-    margin: 0 auto;
-    max-width: 800px;
-}
-
-.timeline li {
-    margin-bottom: 30px;
-    position: relative;
-}
-
-.timeline li::before {
-    content: '';
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: var(--accent-color);
-    border-radius: 50%;
-    left: -39px;
-    top: 10px;
-}
-
-/* Căn lề cho phần text bên trong */
-.timeline-content {
-    padding: 15px 20px;
-    border-radius: 10px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border-left: 4px solid transparent;
-    cursor: default;
-}
-
-.timeline-content h3 {
-    color: var(--accent-color);
-    margin-bottom: 5px;
-}
-
-/* HIỆU ỨNG TƯƠNG TÁC LÀM NỔI BẬT */
-/* Khi di chuột vào cả danh sách, làm mờ nhẹ tất cả */
-.timeline:hover .timeline-content {
-    opacity: 0.3;
-    filter: blur(1px);
-}
-/* Trừ phần tử đang được di chuột vào thì sáng rực lên */
-.timeline .timeline-content:hover {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateX(15px) scale(1.03);
-    background: var(--card-bg);
-    box-shadow: 0 15px 35px rgba(56, 189, 248, 0.2);
-    border-left: 4px solid var(--accent-color);
-}
-
-/* Nút Bật/Tắt Nhạc Trôi Nổi (Floating Music Button) */
-.music-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    background: var(--card-bg);
-    color: var(--accent-color);
-    border: 2px solid var(--accent-color);
-    cursor: pointer;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-    outline: none;
-}
-
-.music-btn:hover {
-    transform: scale(1.1);
-    background: var(--accent-color);
-    color: var(--bg-color);
-}
-
-/* Hiệu ứng nhịp điệu khi nhạc đang phát */
-.music-btn.playing {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.5); }
-    70% { box-shadow: 0 0 0 15px rgba(56, 189, 248, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #020617;
-    font-size: 0.9rem;
-    color: #64748b;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    #hero h1 { font-size: 2.5rem; }
-    .nav-links { display: none; }
-    .timeline .timeline-content:hover { transform: scale(1.02); }
-}
+// Xử lý sự kiện khi click trực tiếp vào nút nhạc
+musicToggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Ngăn sự kiện click của body
+    
+    if (isMusicPlaying) {
+        player.pauseVideo();
+        isMusicPlaying = false;
+        musicIcon.className = 'fa-solid fa-volume-xmark';
+        musicToggleBtn.classList.remove('playing');
+    } else {
+        player.playVideo();
+        isMusicPlaying = true;
+        musicIcon.className = 'fa-solid fa-music';
+        musicToggleBtn.classList.add('playing');
+    }
+});
