@@ -194,37 +194,104 @@ nav {
     top: 10px;
 }
 
-/* Căn lề cho phần text bên trong */
+/* Thiết kế cho Clickable Content */
 .timeline-content {
     padding: 15px 20px;
     border-radius: 10px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s ease;
     border-left: 4px solid transparent;
-    cursor: default;
+    cursor: pointer; /* Chuyển con trỏ thành bàn tay */
+    background: rgba(30, 41, 59, 0.5);
 }
 
-.timeline-content h3 {
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timeline-header h3 {
     color: var(--accent-color);
     margin-bottom: 5px;
 }
 
-/* HIỆU ỨNG TƯƠNG TÁC LÀM NỔI BẬT */
-/* Khi di chuột vào cả danh sách, làm mờ nhẹ tất cả */
-.timeline:hover .timeline-content {
-    opacity: 0.3;
-    filter: blur(1px);
+.toggle-icon {
+    transition: transform 0.3s ease;
+    color: #94a3b8;
 }
-/* Trừ phần tử đang được di chuột vào thì sáng rực lên */
-.timeline .timeline-content:hover {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateX(15px) scale(1.03);
+
+/* Hiệu ứng khi di chuột qua */
+.timeline-content:hover {
     background: var(--card-bg);
-    box-shadow: 0 15px 35px rgba(56, 189, 248, 0.2);
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* CSS cho Phần GitHub Issue ẩn */
+.achievement-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.github-issue-box {
+    margin-top: 15px;
+    background: #0d1117; /* Màu nền đen đặc trưng của Github */
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 15px;
+    font-size: 0.9rem;
+}
+
+.issue-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+}
+
+.issue-title {
+    color: #c9d1d9;
+    font-weight: bold;
+}
+
+.issue-tag {
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+}
+
+.issue-body {
+    color: #8b949e;
+    padding-left: 25px;
+}
+
+.issue-body ul {
+    list-style-type: square;
+    padding-left: 15px;
+}
+
+/* Trạng thái Kích hoạt (khi click vào) */
+.timeline-content.active {
+    background: var(--card-bg);
     border-left: 4px solid var(--accent-color);
 }
 
-/* Nút Bật/Tắt Nhạc Trôi Nổi (Floating Music Button) */
+.timeline-content.active .achievement-details {
+    max-height: 500px; /* Đủ lớn để chứa nội dung */
+    opacity: 1;
+}
+
+.timeline-content.active .toggle-icon {
+    transform: rotate(180deg); /* Xoay mũi tên lên trên */
+    color: var(--accent-color);
+}
+
+/* Nút Bật/Tắt Nhạc Trôi Nổi */
 .music-btn {
     position: fixed;
     bottom: 30px;
@@ -252,7 +319,6 @@ nav {
     color: var(--bg-color);
 }
 
-/* Hiệu ứng nhịp điệu khi nhạc đang phát */
 .music-btn.playing {
     animation: pulse 2s infinite;
 }
@@ -271,9 +337,7 @@ footer {
     color: #64748b;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     #hero h1 { font-size: 2.5rem; }
     .nav-links { display: none; }
-    .timeline .timeline-content:hover { transform: scale(1.02); }
 }
