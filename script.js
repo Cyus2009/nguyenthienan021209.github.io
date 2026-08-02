@@ -1,155 +1,279 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyễn Thiện An | Portfolio</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome cho Icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <!-- YouTube IFrame API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
-</head>
-<body>
-    <!-- Navbar -->
-    <nav>
-        <div class="logo">nta_<span>code</span></div>
-        <ul class="nav-links">
-            <li><a href="#about">Về Tôi</a></li>
-            <li><a href="#skills">Kỹ Năng</a></li>
-            <li><a href="#achievements">Thành Tích</a></li>
-            <li><a href="#links">Liên Kết</a></li>
-        </ul>
-    </nav>
+:root {
+    --bg-color: #0f172a;
+    --text-color: #e2e8f0;
+    --accent-color: #38bdf8;
+    --card-bg: #1e293b;
+}
 
-    <!-- Hero Section -->
-    <section id="hero">
-        <div class="hero-content">
-            <p class="greeting">Xin chào, tôi là</p>
-            <h1>Nguyễn Thiện An</h1>
-            <h2 class="typing-text">Competitive Programmer <span class="cursor">|</span></h2>
-            <p class="bio">Học sinh tại Hà Tĩnh. Đam mê Thuật toán, Tự động hóa (RPA/AI) và Công nghệ Bán dẫn.</p>
-            <a href="#links" class="btn">Kết nối với tôi</a>
-        </div>
-    </section>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <!-- About Section -->
-    <section id="about" class="container">
-        <h2 class="section-title">Về <span>Tôi</span></h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>Mục tiêu của mình là theo đuổi ngành <strong>Kỹ thuật máy tính / Công nghệ Bán dẫn</strong> tại <strong>UET</strong> hoặc <strong>HUST</strong>. Mình có niềm đam mê đặc biệt với ngôn ngữ C++ và các thuật toán đồ thị, cấu trúc dữ liệu nâng cao.</p>
-                <p>Ngoài giờ code, mình thường xuyên tập Gym để rèn luyện sức khỏe, đi du lịch khám phá cảnh quan thiên nhiên và có "thú vui" tìm hiểu về các thiết bị phần cứng như bàn phím cơ, chuột máy tính.</p>
-            </div>
-        </div>
-    </section>
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
 
-    <!-- Skills Section -->
-    <section id="skills" class="container">
-        <h2 class="section-title">Kỹ <span>Năng</span></h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <i class="fa-solid fa-code"></i>
-                <h3>C++ & Thuật toán</h3>
-                <p>Thành thạo C++, tối ưu hóa bộ nhớ. Nắm vững DSU, BFS, Binary Search, Dijkstra, Floyd-Warshall.</p>
-            </div>
-            <div class="skill-card">
-                <i class="fa-solid fa-robot"></i>
-                <h3>AI & Tự động hóa</h3>
-                <p>Nghiên cứu về RPA, phát triển Bot AI đọc và tương tác dữ liệu. Hoàn thành khóa học Ứng dụng AI cho Thanh niên (OpenEDU).</p>
-            </div>
-            <div class="skill-card">
-                <i class="fa-solid fa-video"></i>
-                <h3>Media & Design</h3>
-                <p>Sử dụng thành thạo Canva, CapCut để thiết kế và dựng phim (từng thực hiện dự án phim ngắn 3 phút về An toàn giao thông).</p>
-            </div>
-        </div>
-    </section>
+h1, h2, h3 {
+    font-family: 'Fira Code', monospace;
+}
 
-    <!-- Achievements Section -->
-    <section id="achievements" class="container">
-        <h2 class="section-title">Thành <span>Tích Nổi Bật</span></h2>
-        <ul class="timeline">
-            <li>
-                <div class="timeline-content">
-                    <h3>Dự tuyển Học sinh giỏi Quốc gia (2026-2027)</h3>
-                    <p>Thành viên đội dự tuyển học sinh giỏi quốc gia môn Tin Học tỉnh Hà Tĩnh.</p>
-                </div>
-            </li>
-            <li>
-                <div class="timeline-content">
-                    <h3>Giải Nhì Học sinh giỏi Tỉnh (2025-2026)</h3>
-                    <p>Đạt giải Nhì kỳ thi chọn Học sinh giỏi tỉnh Hà Tĩnh.</p>
-                </div>
-            </li>
-            <li>
-                <div class="timeline-content">
-                    <h3>Giải Nhì Tin học trẻ Tỉnh (2025-2026)</h3>
-                    <p>Đạt giải Nhì hội thi Tin học trẻ tỉnh Hà Tĩnh.</p>
-                </div>
-            </li>
-            <li>
-                <div class="timeline-content">
-                    <h3>Giải Ba Học sinh giỏi Tỉnh (2024-2025)</h3>
-                    <p>Đạt giải Ba kỳ thi chọn Học sinh giỏi tỉnh Hà Tĩnh.</p>
-                </div>
-            </li>
-        </ul>
-    </section>
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
 
-    <!-- Links/Interact Section -->
-    <section id="links" class="container">
-        <h2 class="section-title">Liên <span>Kết</span></h2>
-        <p style="text-align: center; margin-bottom: 30px;">Các nền tảng mạng xã hội và kênh rèn luyện thuật toán của tôi.</p>
-        <div class="links-grid">
-            <a href="https://www.facebook.com/cyushihihi" class="link-card" target="_blank">
-                <i class="fa-brands fa-facebook" style="color: #1877F2;"></i>
-                <h3>Facebook</h3>
-                <p>Kết nối & giao lưu</p>
-            </a>
-            <a href="https://www.instagram.com/_tka_nt.an_" class="link-card" target="_blank">
-                <i class="fa-brands fa-instagram" style="color: #E4405F;"></i>
-                <h3>Instagram</h3>
-                <p>Chia sẻ khoảnh khắc</p>
-            </a>
-            <a href="https://www.tiktok.com/@wish2027thanhsinhvienuet" class="link-card" target="_blank">
-                <i class="fa-brands fa-tiktok" style="color: #ffffff;"></i>
-                <h3>TikTok</h3>
-                <p>Video giải trí & học tập</p>
-            </a>
-            <a href="https://oj.vnoi.info/user/thienan021209" class="link-card" target="_blank">
-                <i class="fa-solid fa-laptop-code" style="color: #38bdf8;"></i>
-                <h3>VNOJ</h3>
-                <p>Nền tảng thi đấu thuật toán</p>
-            </a>
-            <a href="https://oj.thptchuyenhatinh.edu.vn/user/saccarose123" class="link-card" target="_blank">
-                <i class="fa-solid fa-code" style="color: #10b981;"></i>
-                <h3>CHTOJ</h3>
-                <p>Chấm bài online CHT</p>
-            </a>
-            <a href="https://github.com/Cyus2009" class="link-card" target="_blank">
-                <i class="fa-brands fa-github" style="color: #94a3b8;"></i>
-                <h3>GitHub</h3>
-                <p>Nơi lưu trữ mã nguồn</p>
-            </a>
-        </div>
-    </section>
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Fira Code', monospace;
+}
 
-    <!-- Background Music Player -->
-    <div id="music-container">
-        <button id="music-toggle" class="music-btn" title="Phát nhạc thư giãn">
-            <i class="fa-solid fa-volume-xmark"></i>
-        </button>
-        <!-- YouTube IFrame sẽ ẩn ở đây -->
-        <div id="yt-player" style="display: none;"></div>
-    </div>
+.logo span {
+    color: var(--accent-color);
+}
 
-    <footer>
-        <p>&copy; 2026 Nguyễn Thiện An. Designed for the Future.</p>
-    </footer>
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
 
-    <script src="script.js"></script>
-</body>
-</html>
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Hero Section */
+#hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.greeting {
+    color: var(--accent-color);
+    font-family: 'Fira Code', monospace;
+    margin-bottom: 10px;
+}
+
+#hero h1 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
+
+.typing-text {
+    font-size: 1.5rem;
+    color: #94a3b8;
+    margin-bottom: 20px;
+}
+
+.cursor {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.bio {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    color: #cbd5e1;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+}
+
+/* Common Container */
+.container {
+    padding: 80px 10%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+.section-title span {
+    color: var(--accent-color);
+}
+
+/* Skills Grid */
+.skills-grid, .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.skill-card, .link-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 3px solid transparent;
+}
+
+.skill-card:hover, .link-card:hover {
+    transform: translateY(-10px);
+    border-top: 3px solid var(--accent-color);
+    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.1);
+}
+
+.skill-card i, .link-card i {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+}
+
+.link-card {
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
+}
+
+/* Timeline & Achievement Hover Effect */
+.timeline {
+    list-style: none;
+    border-left: 2px solid var(--accent-color);
+    padding-left: 30px;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.timeline li {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.timeline li::before {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    left: -39px;
+    top: 10px;
+}
+
+/* Căn lề cho phần text bên trong */
+.timeline-content {
+    padding: 15px 20px;
+    border-radius: 10px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-left: 4px solid transparent;
+    cursor: default;
+}
+
+.timeline-content h3 {
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+/* HIỆU ỨNG TƯƠNG TÁC LÀM NỔI BẬT */
+/* Khi di chuột vào cả danh sách, làm mờ nhẹ tất cả */
+.timeline:hover .timeline-content {
+    opacity: 0.3;
+    filter: blur(1px);
+}
+/* Trừ phần tử đang được di chuột vào thì sáng rực lên */
+.timeline .timeline-content:hover {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(15px) scale(1.03);
+    background: var(--card-bg);
+    box-shadow: 0 15px 35px rgba(56, 189, 248, 0.2);
+    border-left: 4px solid var(--accent-color);
+}
+
+/* Nút Bật/Tắt Nhạc Trôi Nổi (Floating Music Button) */
+.music-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+    outline: none;
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+    background: var(--accent-color);
+    color: var(--bg-color);
+}
+
+/* Hiệu ứng nhịp điệu khi nhạc đang phát */
+.music-btn.playing {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.5); }
+    70% { box-shadow: 0 0 0 15px rgba(56, 189, 248, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #020617;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #hero h1 { font-size: 2.5rem; }
+    .nav-links { display: none; }
+    .timeline .timeline-content:hover { transform: scale(1.02); }
+}
