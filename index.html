@@ -9,6 +9,8 @@
     <!-- Font Awesome cho Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -79,7 +81,7 @@
             <li>
                 <div class="timeline-content">
                     <h3>Giải Nhì Học sinh giỏi Tỉnh (2025-2026)</h3>
-                    <p>Đạt giải Nhì môn Tin học kỳ thi chọn Học sinh giỏi tỉnh Hà Tĩnh.</p>
+                    <p>Đạt giải Nhì kỳ thi chọn Học sinh giỏi tỉnh Hà Tĩnh.</p>
                 </div>
             </li>
             <li>
@@ -91,7 +93,7 @@
             <li>
                 <div class="timeline-content">
                     <h3>Giải Ba Học sinh giỏi Tỉnh (2024-2025)</h3>
-                    <p>Đạt giải Ba môn Tin học kỳ thi chọn Học sinh giỏi tỉnh Hà Tĩnh.</p>
+                    <p>Đạt giải Ba kỳ thi chọn Học sinh giỏi tỉnh Hà Tĩnh.</p>
                 </div>
             </li>
         </ul>
@@ -134,6 +136,15 @@
             </a>
         </div>
     </section>
+
+    <!-- Background Music Player -->
+    <div id="music-container">
+        <button id="music-toggle" class="music-btn" title="Phát nhạc thư giãn">
+            <i class="fa-solid fa-volume-xmark"></i>
+        </button>
+        <!-- YouTube IFrame sẽ ẩn ở đây -->
+        <div id="yt-player" style="display: none;"></div>
+    </div>
 
     <footer>
         <p>&copy; 2026 Nguyễn Thiện An. Designed for the Future.</p>
