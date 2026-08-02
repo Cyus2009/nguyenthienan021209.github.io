@@ -1,48 +1,155 @@
-// Hiệu ứng gõ chữ cho tiêu đề
-const texts = [
-    "Competitive Programmer", 
-    "AI & RPA Enthusiast", 
-    "Tech Hardware Lover"
-];
-let count = 0;
-let index = 0;
-let currentText = "";
-let letter = "";
-let isDeleting = false;
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Thiện An | Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome cho Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">nta_<span>code</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">Về Tôi</a></li>
+            <li><a href="#skills">Kỹ Năng</a></li>
+            <li><a href="#achievements">Thành Tích</a></li>
+            <li><a href="#links">Liên Kết</a></li>
+        </ul>
+    </nav>
 
-function type() {
-    if (count === texts.length) {
-        count = 0;
-    }
-    currentText = texts[count];
-    
-    if (isDeleting) {
-        letter = currentText.slice(0, --index);
-    } else {
-        letter = currentText.slice(0, ++index);
-    }
-    
-    document.querySelector('.typing-text').innerHTML = letter + '<span class="cursor">|</span>';
-    
-    let typeSpeed = 100;
-    
-    if (isDeleting) {
-        typeSpeed /= 2;
-    }
-    
-    if (!isDeleting && letter.length === currentText.length) {
-        typeSpeed = 2000; // Dừng lại 2s khi gõ xong
-        isDeleting = true;
-    } else if (isDeleting && letter.length === 0) {
-        isDeleting = false;
-        count++;
-        typeSpeed = 500; // Dừng 0.5s trước khi gõ từ mới
-    }
-    
-    setTimeout(type, typeSpeed);
-}
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <p class="greeting">Xin chào, tôi là</p>
+            <h1>Nguyễn Thiện An</h1>
+            <h2 class="typing-text">Competitive Programmer <span class="cursor">|</span></h2>
+            <p class="bio">Học sinh tại Hà Tĩnh. Đam mê Thuật toán, Tự động hóa (RPA/AI) và Công nghệ Bán dẫn.</p>
+            <a href="#links" class="btn">Kết nối với tôi</a>
+        </div>
+    </section>
 
-// Khởi chạy khi tải trang
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(type, 1000);
-});
+    <!-- About Section -->
+    <section id="about" class="container">
+        <h2 class="section-title">Về <span>Tôi</span></h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Mục tiêu của mình là theo đuổi ngành <strong>Kỹ thuật máy tính / Công nghệ Bán dẫn</strong> tại <strong>UET</strong> hoặc <strong>HUST</strong>. Mình có niềm đam mê đặc biệt với ngôn ngữ C++ và các thuật toán đồ thị, cấu trúc dữ liệu nâng cao.</p>
+                <p>Ngoài giờ code, mình thường xuyên tập Gym để rèn luyện sức khỏe, đi du lịch khám phá cảnh quan thiên nhiên và có "thú vui" tìm hiểu về các thiết bị phần cứng như bàn phím cơ, chuột máy tính.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="container">
+        <h2 class="section-title">Kỹ <span>Năng</span></h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fa-solid fa-code"></i>
+                <h3>C++ & Thuật toán</h3>
+                <p>Thành thạo C++, tối ưu hóa bộ nhớ. Nắm vững DSU, BFS, Binary Search, Dijkstra, Floyd-Warshall.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-robot"></i>
+                <h3>AI & Tự động hóa</h3>
+                <p>Nghiên cứu về RPA, phát triển Bot AI đọc và tương tác dữ liệu. Hoàn thành khóa học Ứng dụng AI cho Thanh niên (OpenEDU).</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-video"></i>
+                <h3>Media & Design</h3>
+                <p>Sử dụng thành thạo Canva, CapCut để thiết kế và dựng phim (từng thực hiện dự án phim ngắn 3 phút về An toàn giao thông).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="container">
+        <h2 class="section-title">Thành <span>Tích Nổi Bật</span></h2>
+        <ul class="timeline">
+            <li>
+                <div class="timeline-content">
+                    <h3>Dự tuyển Học sinh giỏi Quốc gia (2026-2027)</h3>
+                    <p>Thành viên đội dự tuyển học sinh giỏi quốc gia môn Tin Học tỉnh Hà Tĩnh.</p>
+                </div>
+            </li>
+            <li>
+                <div class="timeline-content">
+                    <h3>Giải Nhì Học sinh giỏi Tỉnh (2025-2026)</h3>
+                    <p>Đạt giải Nhì kỳ thi chọn Học sinh giỏi tỉnh Hà Tĩnh.</p>
+                </div>
+            </li>
+            <li>
+                <div class="timeline-content">
+                    <h3>Giải Nhì Tin học trẻ Tỉnh (2025-2026)</h3>
+                    <p>Đạt giải Nhì hội thi Tin học trẻ tỉnh Hà Tĩnh.</p>
+                </div>
+            </li>
+            <li>
+                <div class="timeline-content">
+                    <h3>Giải Ba Học sinh giỏi Tỉnh (2024-2025)</h3>
+                    <p>Đạt giải Ba kỳ thi chọn Học sinh giỏi tỉnh Hà Tĩnh.</p>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Links/Interact Section -->
+    <section id="links" class="container">
+        <h2 class="section-title">Liên <span>Kết</span></h2>
+        <p style="text-align: center; margin-bottom: 30px;">Các nền tảng mạng xã hội và kênh rèn luyện thuật toán của tôi.</p>
+        <div class="links-grid">
+            <a href="https://www.facebook.com/cyushihihi" class="link-card" target="_blank">
+                <i class="fa-brands fa-facebook" style="color: #1877F2;"></i>
+                <h3>Facebook</h3>
+                <p>Kết nối & giao lưu</p>
+            </a>
+            <a href="https://www.instagram.com/_tka_nt.an_" class="link-card" target="_blank">
+                <i class="fa-brands fa-instagram" style="color: #E4405F;"></i>
+                <h3>Instagram</h3>
+                <p>Chia sẻ khoảnh khắc</p>
+            </a>
+            <a href="https://www.tiktok.com/@wish2027thanhsinhvienuet" class="link-card" target="_blank">
+                <i class="fa-brands fa-tiktok" style="color: #ffffff;"></i>
+                <h3>TikTok</h3>
+                <p>Video giải trí & học tập</p>
+            </a>
+            <a href="https://oj.vnoi.info/user/thienan021209" class="link-card" target="_blank">
+                <i class="fa-solid fa-laptop-code" style="color: #38bdf8;"></i>
+                <h3>VNOJ</h3>
+                <p>Nền tảng thi đấu thuật toán</p>
+            </a>
+            <a href="https://oj.thptchuyenhatinh.edu.vn/user/saccarose123" class="link-card" target="_blank">
+                <i class="fa-solid fa-code" style="color: #10b981;"></i>
+                <h3>CHTOJ</h3>
+                <p>Chấm bài online CHT</p>
+            </a>
+            <a href="https://github.com/Cyus2009" class="link-card" target="_blank">
+                <i class="fa-brands fa-github" style="color: #94a3b8;"></i>
+                <h3>GitHub</h3>
+                <p>Nơi lưu trữ mã nguồn</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Background Music Player -->
+    <div id="music-container">
+        <button id="music-toggle" class="music-btn" title="Phát nhạc thư giãn">
+            <i class="fa-solid fa-volume-xmark"></i>
+        </button>
+        <!-- YouTube IFrame sẽ ẩn ở đây -->
+        <div id="yt-player" style="display: none;"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Nguyễn Thiện An. Designed for the Future.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
